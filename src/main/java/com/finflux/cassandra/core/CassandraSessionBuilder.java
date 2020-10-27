@@ -14,6 +14,7 @@ import com.datastax.oss.driver.api.querybuilder.SchemaBuilder;
 import com.datastax.oss.driver.api.querybuilder.schema.CreateKeyspace;
 import com.datastax.oss.driver.api.querybuilder.schema.CreateKeyspaceStart;
 import com.datastax.oss.driver.internal.core.auth.PlainTextAuthProvider;
+import com.datastax.oss.driver.internal.core.type.codec.ZonedTimestampCodec;
 import com.finflux.cassandra.codec.LocalDateTimeCodec;
 import com.finflux.cassandra.util.ContactPointUtils;
 
@@ -57,6 +58,7 @@ public interface CassandraSessionBuilder {
         builder.withConfigLoader(driverConfigLoader);
         builder.withLocalDatacenter(cassandraConnectionData.getDataCenterName());
         builder.addTypeCodecs(new LocalDateTimeCodec());
+        builder.addTypeCodecs(new ZonedTimestampCodec());
         return builder;
     }
 
